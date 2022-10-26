@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -29,32 +32,7 @@ Route::get('/about', function () { //rute pertama untuk meng akses website
     ]);
 });
 
-Route::get('/blog', function () { //rute pertama untuk meng akses website
-
-        $blog_post = [
-
-            [
-                "title" => "Employee 1",
-                "slug" => "employee-1",
-                "author" => "Hafizd Muhammad",
-                "body" => "Hallo saya Hafizd Muhammad, IT Specialist Rapid Infrastruktur Indonesia"
-            ],
-        
-            [
-                "title" => "Employee 2",
-                "slug" => "employee-2",
-                "author" => "Jevinna",
-                "body" => "Hallo saya Jevinna Euginia, Human Capital Rapid Infrastruktur Indonesia"
-            ],
-        
-        
-        ];
-
-    return view('post', [
-        "title" => "Blog",
-        "post" => $blog_post
-    ]);
-});
+Route::get('/blog', [PostController::class, 'index']); //-> Perintah untuk memanggil data dari controller (PostController)
 
 
 
@@ -67,40 +45,6 @@ Route::get('/join-us', function () { //nama halaman rute pertama untuk meng akse
 
 //ini halaman single employee
 
-Route::get('post/{slug}', function($slug){
-
-    $blog_post = [
-
-        [
-            "title" => "Employee 1",
-            "slug" => "employee-1",
-            "author" => "Hafizd Muhammad",
-            "body" => "Hallo saya Hafizd Muhammad, IT Specialist Rapid Infrastruktur Indonesia"
-        ],
-    
-        [
-            "title" => "Employee 2",
-            "slug" => "employee-2",
-            "author" => "Jevinna",
-            "body" => "Hallo saya Jevinna Euginia, Human Capital Rapid Infrastruktur Indonesia"
-        ]
-    
-    
-    ];
-
-    $new_post = [];
-    foreach ($blog_post as $post) {
-        if($post["slug"] === $slug) {
-            $new_post = $post;
-        }
-    }
-
-
-    return view('pos', [
-        "title" => "Single Post",
-        "post" => $new_post
-                
-    ]);
-});
+Route::get('post/{slug}', [PostController::class, 'show']); //-> Perintah untuk memanggil data single post dari controller (PostController)
 
 
