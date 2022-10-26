@@ -11,3 +11,5 @@
     <img src="{{ $image }}" alt="{{ $name }}" width="200">
 
 @endsection
+
+

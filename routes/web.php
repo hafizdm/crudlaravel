@@ -45,6 +45,6 @@ Route::get('/join-us', function () { //nama halaman rute pertama untuk meng akse
 
 //ini halaman single employee
 
-Route::get('post/{slug}', [PostController::class, 'show']); //-> Perintah untuk memanggil data single post dari controller (PostController)
-
+Route::get('post/{post:slug}', [PostController::class, 'show']); //-> Perintah untuk memanggil data single post dari controller (PostController)
+//Perintah slug diatas terhubung dengan perintah di post.blade.php
 
