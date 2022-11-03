@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
@@ -47,4 +48,19 @@ Route::get('/join-us', function () { //nama halaman rute pertama untuk meng akse
 
 Route::get('post/{post:slug}', [PostController::class, 'show']); //-> Perintah untuk memanggil data single post dari controller (PostController)
 //Perintah slug diatas terhubung dengan perintah di post.blade.php
+
+Route::get('/categories', function(){
+    return view('categories', [
+        'title' => 'Post Categories',
+        'categories' => Category::all()
+    ]);
+});
+
+Route::get('/categories/{category:slug}', function(Category $category){
+    return view('category', [
+        'title' => $category->name,
+        'posts' => $category->posts,
+        'category' => $category->name
+    ]);
+});
 
